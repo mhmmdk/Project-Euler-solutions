@@ -1,0 +1,31 @@
+import time
+
+def b(x):
+    p = [3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+    for i in range(len(p)):
+        if not x%p[i]:
+            return False
+    return True
+
+def pseudo_list(n):
+    li = [i for i in range(3, n+1, 2) if b(i)]
+    if n<100:
+        li = [i for i in range(2, n+1) if i%2 and i%3]
+        return [2,3] + li
+    return [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97] + list(li)
+
+def prime_divisor(N):
+    li = pseudo_list(int(N**0.5))
+    factors = []
+    for i in li:
+        if not N%i:
+            a,b = i, N//i
+            factors.extend([a])
+            prime_divisor(b)   
+    return factors
+        
+t1 = time.time()
+N = 600851475143
+print(max(prime_divisor(N)))
+t2 = time.time()
+print(t1 - t2)
