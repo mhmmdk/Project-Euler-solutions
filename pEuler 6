@@ -1,0 +1,6 @@
+def square_sum(n):
+    return sum(map(lambda x: x**2, list(range(1,n+1))))
+
+def sum_square(n):
+    return sum(list(range(1,n+1)))**2
+print(sum_square(100)- square_sum(100))
