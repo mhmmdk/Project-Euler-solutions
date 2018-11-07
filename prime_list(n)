@@ -1,0 +1,35 @@
+# generates list of prime numbers up to n
+import time
+
+def b(x):
+    p = [3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+    for i in range(len(p)):
+        if not x%p[i]:
+            return False
+    return True
+
+def pseudo_list(n):
+    li = [i for i in range(3, n+1, 2) if b(i)]
+    return list(li)
+
+def prime_generator(n):
+    li = pseudo_list(n)
+    for i in li:
+        j = len(li) - 1
+        ma = li.index(i) + 1
+        while(j > ma):
+            if i*2 > li[j]:
+                break
+            if not li[j]%i:
+                li.pop(j)
+            j -= 1
+    return [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97] + list(li)
+
+
+
+t1 = time.time()
+n = 100
+print(len(prime_generator(n)))
+t2 = time.time()
+
+print(t1 - t2)
