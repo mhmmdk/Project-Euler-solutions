@@ -1,0 +1,41 @@
+from time import time
+from time import sleep
+st = time()
+
+'''
+#This method num_divisors(Num, start_divisor) only checks half of divisors
+#and with out counting 1 and itself if start_divisor is > 1
+#The number of full divisors is 2*ret of num_divisors
+'''
+def num_divisors(n, divisor):
+    sqrtN = n**0.5    
+    i = divisor
+    c = 0               
+    while i < sqrtN:
+        if not n%i:
+            divisor = i
+            c += 1
+            break 
+        i += 1
+    if i < sqrtN:
+        divisor += 1
+        c += num_divisors(n, divisor)
+    return c
+
+
+" Brute forcing which takes only 9.84299993515 sec"
+i = 1
+answer = 0
+while True:
+    n = (i**2 + i)//2           
+    num = num_divisors(n, 1)
+
+    if 2*num > 500:
+        answer = n
+        break
+    i += 1
+    
+print(answer)
+print('________THE___________%s__________END________'%(time() - st))
+import os
+os.system("pause")
