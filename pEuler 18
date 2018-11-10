@@ -1,0 +1,24 @@
+
+ones = [3,3,5,4,4,3,5,5,4,3]
+tens = [6,6,8,8,7,7,9,8,8,6]
+hundreds = [6,6,5,5,5,7,6,6,7]                  #20-100
+teens = ones + tens
+for i in range(8):
+    t = []
+    for j in range(9):
+        t += [hundreds[i]+ones[j]]
+    t += [hundreds[i+1]]
+    teens += t
+
+for i in range(9):
+    t = []
+    for j in range(99):
+        t += [ones[i]+ 10 + teens[j]]
+    t += [ones[i+1] + 7]
+    teens += t
+teens.pop()
+tr = 998
+print(teens[tr-10:tr])
+print(teens[tr-1])
+print(teens[tr])
+print(sum(teens[99:999]))
