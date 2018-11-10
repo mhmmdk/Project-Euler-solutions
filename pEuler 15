@@ -1,0 +1,21 @@
+
+n = 20
+li = []
+tem = []
+for i in range(n):
+    tem += [1]
+li += [tem]
+
+for j in range(n-1):
+    tem = []
+    for i in range(n, 0, -1):
+        tem += [sum(li[j][:i])]
+    tem.reverse()
+    li += [tem]
+
+#print((li))
+
+tot = 0
+for i in range(n):
+    tot += sum(li[i])
+print(tot + 1)
