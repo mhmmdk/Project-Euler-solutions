@@ -1,0 +1,17 @@
+lroute = list(map(int, s.split("\n")[len(s.split("\n"))-1].split()))
+for i in s.split("\n")[len(s.split("\n"))-2::-1]:
+    route = list(map(int, i.split()))
+    print(route)
+    print(lroute)
+    at = 0
+    temp = []
+    for j in route:
+        if lroute[at] > lroute[at+1]:
+            temp += [j+lroute[at]]
+            #print(temp)
+        else:
+            temp += [j+lroute[at+1]]
+            #print(temp)
+        at += 1
+    lroute = temp
+print(lroute)
