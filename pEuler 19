@@ -1,0 +1,29 @@
+def isleap(year):
+    if not year%100:
+        if not year%400:
+            return 29
+        return 28
+    if not year%4:
+        return 29
+    return 28
+
+def firstdayofmonth(month, year):
+    days = 0
+    for y in range(year - 1900 if year>1900 else 1900-year):
+        #print(y)
+        days += sum([31,isleap(1900+y),31,30,31,30,31,31,30,31,30,31])
+    days += sum([31,isleap(year),31,30,31,30,31,31,30,31,30,31][:month])
+    return (days+1)%7
+
+ans = 0
+y = 1901
+while y <= 2000:
+    for m in range(12):
+        if not firstdayofmonth(m, y):
+            ans += 1
+    y += 1
+
+
+
+    
+print(ans)
