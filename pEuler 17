@@ -1,0 +1,11 @@
+from time import time
+st = time()
+
+n = 2**15
+sN = str(n)
+tot = 0
+for i in sN:
+    tot += int(i)
+print(tot)
+
+print('___________________%s__________________'%(time() - st))
