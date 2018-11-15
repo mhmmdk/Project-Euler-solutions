@@ -21,43 +21,36 @@ def sum_divisors(n, divisor):
         t += sum_divisors(n, divisor)
     return t
 
-def amic(n):
-    t =0
-    for i in range(n):
-        if sum_divisors(sum_divisors(i,1), 1)== i:
-            print(i)
-            t+=i
-    print(t)
-    
+n = 10000
+li = list(range(2,n))
+for i in range(2,n):
+    di = sum_divisors(i,1)
+    if di == i:
+        try:
+            li.remove(i)
+        except:
+            ''
+        continue
+    ddi = sum_divisors(di,1)
+    if di < 4:
+        try:
+            li.remove(i)
+            #print(i, di)
+        except:
+            ""
+    elif ddi!=i:
+        try:
+            li.remove(i)
+            #print("removed", i, di, ddi)
+        except:
+            ''
+    else:
+        '''print("amic", i,di,ddi)'''
+        
+t = sum_divisors(1,1)
+print(li)
+print(sum(li))
 
-
-def primeFactorize(n):
-    li = []
-    p = []
-    i = 1
-    while n > 1:
-        i += 1
-        if not n%i:
-            n = n//i
-            p += [i]
-            li += [n]
-            #print(li)
-            
-            i -= 1
-    print(p)
-    return p
-
-def prod(t):
-    t = list(t)
-    #print(t)
-    p = 1
-    for i in t:
-        p *= i
-    return p
-
-import itertools
-i = itertools.combinations([1,2,3,4,5,6],4)
-#print(list(i))
 
 print('___________________%s__________________'%(time() - st))
 
