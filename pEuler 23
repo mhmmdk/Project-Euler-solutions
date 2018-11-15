@@ -1,0 +1,116 @@
+from time import time
+st = time()
+
+n = 2200000000000
+
+def sum_divisors(n, divisor):
+    sqrtN = n**0.5    
+    i = divisor
+    t = 0
+    while i <= sqrtN:
+        if not n%i:
+            divisor = i
+            if i == n//i or i == 1:
+                #print(i, n//i)
+                t+= i
+                break
+            t += sum([i,n//i])
+            #print(i, n//i)
+            break 
+        i += 1
+    if i < sqrtN:
+        divisor += 1
+        t += sum_divisors(n, divisor)
+    return t
+
+def amic(n):
+    t =0
+    for i in range(n):
+        if sum_divisors(sum_divisors(i,1), 1)== i:
+            print(i)
+            t+=i
+    print(t)
+    
+
+
+def primeFactorize(n):
+    li = []
+    p = []
+    i = 1
+    while n > 1:
+        i += 1
+        if not n%i:
+            n = n//i
+            p += [i]
+            li += [n]
+            #print(li)
+            
+            i -= 1
+    print(p)
+    return p
+
+def prod(t):
+    t = list(t)
+    #print(t)
+    p = 1
+    for i in t:
+        p *= i
+    return p
+
+
+abundant= [12]
+ans = []
+lab = 1
+n= 37
+for i in range(12,n):
+    p = sum_divisors(i, 1)
+    if p>i:
+        abundant += [i]
+        lab += 1
+        for j in range(lab):
+            if abundant[j] + i<n:
+                #print(abundant[j], ans)
+                ans += [abundant[j] + i]
+            else:
+                break
+
+
+#print(lab, abundant)
+ans = list(set(ans))
+print((ans))
+
+print(sum(list(range(28124))),sum(ans))
+        
+
+print('___________________%s__________________'%(time() - st))
+st = time()
+abundant = []
+n= 5000
+for i in range(12,n):
+    p = sum_divisors(i, 1)
+    if p>i:
+        abundant += [i]
+
+#print(len(abundant), abundant)
+ab, na = [],0
+l = len(abundant)
+for n in range(1,n):
+    for i in range(l):
+        ai = abundant[i]
+        if n > ai and n-ai >= ai:
+            try:
+                abundant.index(n-ai,i,n)
+                #print("sum of two abundant", n, i)
+                ab += [n]
+                break
+            except:
+                ""
+        #else:
+            #print("not sum of 2 abundant", n, i)
+            #na += n
+            #break
+
+print(len(ab))
+#print(na)
+
+print('___________________%s__________________'%(time() - st))
