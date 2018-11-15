@@ -1,0 +1,19 @@
+s = open(r"C:\Users\insa\Desktop\n.txt").read()
+#s = '"MARY","PATRICIA","LINDA","BARBARA"'
+s = s[1:len(s)-1].split('","')
+#print(s)
+s.sort()
+#print(s)
+s = '","'.join(s)
+for i in range(26):
+    s = s.replace(chr(ord('A')+i),str(i+1)+"+")
+#print(s)
+s = s.split('","')
+#print(s)
+ans = 0
+for i in range(len(s)):
+    ans += (i+1)*eval(s[i]+"0")
+    #print((i),s[i],eval(s[i]+"0"))
+print(len(s),ans)
+
+
