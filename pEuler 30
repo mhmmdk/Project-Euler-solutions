@@ -1,0 +1,16 @@
+r = 1000000
+tot = 0
+for i in range(2,r):
+    su = 0
+    for j in str(i):
+        if su <= i:
+            su += int(j)**5
+            
+        else:
+            break
+    if su == i:
+        print(i,su)
+        tot += i
+
+
+print(tot)
