@@ -1,0 +1,11 @@
+li = []
+r = 100
+for a in range(2,r+1):
+    for b in range(2,r+1):
+        li += [a**b]
+
+
+
+
+
+print(len(set(li)))
