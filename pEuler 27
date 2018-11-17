@@ -1,0 +1,52 @@
+def primeFactorize(n):
+    li = []
+    p = []
+    i = 1
+    while n > 1:
+        i += 1
+        if not n%i:
+            n = n//i
+            p += [i]
+            li += [n]
+            #if len(li) > 1:
+                #return False
+            #print(li)
+
+            i -= 1
+    #print(p)
+    return False if len(p)>1 else True
+'''
+l= []
+for i in range(500):
+    if primeFactorize(i):
+        l += [i]
+print(l)
+'''
+st, sp = -1000, 1000
+ma = 0
+at = []
+
+for a in range(st, sp):
+    #print("a",a)
+    for b in range(st, sp):
+        #print("b",b)
+        #a,b = [-61, 61]
+        temp = [0]
+        c = 0
+        for n in range(100000000):
+            #print(n, end="  ")
+            p = n*n + (a*n) + b
+            if p < 0:
+                break
+            if primeFactorize(p):
+                #print(n, "n2 +"+str(a)+"n+"+str(b), "  prime made", p)
+                c += 1
+                temp += [c,p,a,b]
+            else:
+                #print(n,"n2 +"+str(a)+"n+"+str(b),"   not prime", p)
+                c = n
+                break
+        if ma < c:
+            at = [a,b]
+            ma = c
+        
