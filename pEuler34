@@ -1,0 +1,23 @@
+def f(x):
+    if x == 0:
+        return 1
+    ans = x
+    for i in range(2,x):
+        ans *= i
+    return ans
+
+ans = 0
+for i in range(11,100000000):
+    tot = 0
+    t = i
+    r = i%10
+    while t > 0:
+        #print(r,t)
+        tot += f(r)
+        t = t//10
+        r =  t%10
+    if tot == i:
+        ans += tot
+        print(i)
+
+print(ans)
