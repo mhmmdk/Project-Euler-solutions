@@ -1,0 +1,13 @@
+for canc in range(1,10):
+    for num in range(1,10):
+        for den in range(1,10):
+            frac = num/den
+            if frac >= 1:
+                if canc == num and canc == den:
+                    break
+                if (canc*10 + num)/(den*10 + canc) == frac:
+                    print(canc,canc*10 + num,den*10 + canc)
+            else:
+                if (canc*10+num)/(canc*10+den) == frac or (canc+10*num)/(canc+10*den) == frac:
+                    print(canc,num,den)
+                    
