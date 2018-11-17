@@ -1,0 +1,40 @@
+
+p = [1,2,5,10,20,50,100]
+c = 0
+
+for i in range(201):
+    for j in range(201):
+        for k in range(201):
+            for l in range(201):
+                for m in range(201):
+                    for n in range(201):
+                        for o in range(201):
+                            q = p[0]*i + p[1]*j+p[2]*k+p[3]*l+p[4]*m+p[5]*n+p[6]*o
+                            if q == 200:
+                                #print([i,j,k,l,m,n,o],q)
+                                c += 1
+
+
+
+
+print(c)
+
+
+'''
+#may b not brute forcing
+p = [1,2,5]#,10#,20,50,100]
+li = []
+g = 10
+for i in p[::-1]:
+    m = g//i
+    r = g%i
+    temp = [m,i,r]
+    li += [temp]
+    #temp = []
+    for j in range(m-1,1,-1):
+        temp = [j,i,g-j*i]
+        li += [temp]
+print(li)
+
+
+'''
