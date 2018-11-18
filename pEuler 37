@@ -1,0 +1,47 @@
+
+'''
+The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: 3797,
+797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
+Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+'''
+
+def primeGen(n):
+    li = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997]
+    li1 = list(range(1001,n+1))
+    for i in li:
+        #nli = li[10:]
+        for j in li1:
+            if not j%i:
+                li1.remove(j)
+   
+pr = [2,3,5,7]
+ans = []
+n = 1
+for i in range(11,n,2):
+    flag = True
+    for p in pr:
+        if not i%p :
+            flag = False
+            break
+        if p > i**0.5:
+            break
+    if flag:
+        pr += [i]
+        j = 1
+        d = 10**j
+        f = True
+        while i/d >= 1:
+            if not (i//d in pr and i%d in pr):
+                f = False
+                break
+            j += 1
+            d = 10**j
+        if f:
+            ans += [i]
+            if len(ans) == 11:
+                print("answer",ans)
+                break
+
+print(sum(ans))
+
