@@ -1,0 +1,16 @@
+
+tot = 0
+r =1000000
+for i in range(r):
+    si = str(i)
+    li = len(si)
+    k = li//2
+    if si[:k] == si[k+li%2:][::-1]:
+        #print(i,"strings",si[:k],si[k+li%2:])
+        sb = bin(i)[2:]
+        lb = len(sb)
+        kb = lb // 2
+        if sb[:kb] == sb[kb+lb%2:][::-1]:
+            tot += i
+            print(i,sb[:kb],sb[kb+lb%2:])
+
