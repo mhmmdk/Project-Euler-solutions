@@ -1,0 +1,15 @@
+import math
+ 
+def tri(n):
+    dic = {}
+    for i in range(1, n+1):
+        for j in range(i+1, n+1):
+            p = i + j + math.sqrt(i**2 + j**2)
+            if p == int(p) and p < 1000:
+                if not (p in dic):
+                    dic[p] = 0
+                dic[p] += 1
+    return list(dic.keys())[list(dic.values()).index(max(list(dic.values())))]       
+                
+
+print(tri(999))
