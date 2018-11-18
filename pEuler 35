@@ -1,0 +1,29 @@
+def prime(n):
+    li = []
+    p = []
+    i = 1
+    while i < n-1:
+        i += 1
+        if not n%i:
+            return False
+    return True
+
+li = []
+for i in range(2,1000000):
+    if prime(i):
+        s = str(i)
+        ls = len(s)
+        ts = s+s
+        f = True
+        for j in range(1,ls):
+            #print(ts[j:j+ls])
+            if not prime(int(ts[j:j+ls])):
+                f = False
+                #print(ts[j:j+ls])
+                break
+        if f:
+            li += [i]  
+            #print(li)
+
+            
+print(len(list(set(li))))
