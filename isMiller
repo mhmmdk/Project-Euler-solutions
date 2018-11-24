@@ -1,0 +1,35 @@
+from time import time
+st = time()
+print( "STARTING...\n")
+
+
+def sieve(n):
+    p = [5]
+    i = 5
+    while i < n - 2:
+        i += 2
+        p += [i]
+        i += 4
+        p += [i]
+    #p = (i+j for i in range(3, n, 6) for j in (2,4))
+    sqrtN = int(n**0.5)+1
+    pr = []
+    #cont = [2,3]
+    yield 2
+    yield 3
+    for i in p:
+        for j in pr:
+            if not i%j:
+                i = 0
+                break
+        if i:
+            if i<sqrtN:
+                pr += [i]
+            #cont += [i]
+            yield i
+    #return cont
+
+n = 100000
+si = sieve(n)
+print(len(list(si)))
+print("\nTIME TAKEN: ", time()-st)
