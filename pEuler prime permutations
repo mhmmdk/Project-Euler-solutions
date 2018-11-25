@@ -1,0 +1,40 @@
+from itertools import permutations, combinations_with_replacement
+com = combinations_with_replacement("0123456789", 4)
+#print(list(com)[:10])
+pr = []
+prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101]
+for i in com:
+    #si = int("".join(i))
+    #print(i)
+    p = set(permutations(i,4))
+    #print(list(p))
+    for j in p:
+        sj = int("".join(j))
+        #print(sj)
+        flag = True
+        for jj in prime:
+            if not sj%jj:
+                flag = False
+                break
+        if flag:
+            #print(sj)
+            #if not sj in pr:
+            pr += [sj]
+    ind = 1
+    #print(pr)
+    #sleep(3)
+    if len(pr) > 2:
+        c = 0
+        for k in pr:
+            #print(k)
+            c += 1
+            for l in pr[ind:]:
+                #print(k,l,pr)
+                #sleep(1)
+                if k != l:
+                    if 2*l - k in pr:
+                        print(k,l,2*l-k)
+                ind += 1
+            ind = c
+    pr = []
+    
