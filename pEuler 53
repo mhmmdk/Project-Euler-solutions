@@ -1,0 +1,36 @@
+from time import time, sleep
+itime = time()
+
+def comb(n,r):
+    ans = 1
+    n_r = n-r
+    if n_r > r:
+        f = n_r
+        div = r
+    else :
+        f = r
+        div = n_r
+    while n > f:
+        ans *= n
+        n -= 1
+    while div >1:
+        ans /= div
+        div -= 1
+    #print(r,ans)
+    return ans
+
+ans = 0
+for n in range(23,101):
+    c = 0
+    for r in range(4,n//2+1):
+        if comb(n,r)> 1000000:
+            c += 1
+    #print(c)
+    if not n%2:
+        c = c*2 - 1
+    else:
+        c = c*2
+    print(c)
+    ans += c
+print(ans)
+print(time()-itime)
