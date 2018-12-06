@@ -1,0 +1,17 @@
+from time import time, sleep
+itime = time()
+
+a = 2
+m = 0
+for a in range(2,100):
+    ma = 0
+    for b in range(2,100):
+        sm = sum(map(int, str(a**b)))
+        #print(sm)
+        if ma < sm:
+            ma = sm
+    if m < ma:
+        m = ma
+print(m)
+
+print(time()-itime)
