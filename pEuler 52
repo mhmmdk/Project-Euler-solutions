@@ -1,0 +1,14 @@
+from time import time, sleep
+itime = time()
+
+i = 1
+s = sorted(list(str(i)))
+while s != sorted(list(str(2*i))) or s != sorted(list(str(3*i))) or s != sorted(list(str(4*i))) or s != sorted(list(str(5*i))) or s != sorted(list(str(6*i))):
+    i += 1
+    s = sorted(list(str(i)))
+    if not i % 100000:
+        print(i)
+print(i)
+
+print(time()-itime)
+    
