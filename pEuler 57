@@ -1,0 +1,17 @@
+from time import time, sleep
+from fractions import Fraction
+itime = time()
+
+ready = Fraction(1,2)
+c = 0
+for i in range(1000):
+    itr = 1 + ready
+    ready = 1/(2+ready)
+    if itr.numerator//(10**len(str(itr.denominator))) != 0:
+        c += 1
+        print(itr)
+print(c)
+
+
+
+print(time()-itime)
