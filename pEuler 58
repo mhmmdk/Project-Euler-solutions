@@ -1,0 +1,44 @@
+from time import time, sleep
+from math import sqrt
+itime = time()
+
+def isPrime(n):
+    if n in (2,3):
+        return True
+    if not n%2 or not n%3:
+        return False
+    i = 3
+    sqrtn = n**0.5
+    while n%i:
+        i += 2
+        if i > sqrtn:
+            return True
+    return False
+#for i in range(100):
+    #if isPrime(i):
+        #print(i)
+
+od = 3
+primes = []
+diag = 1
+while True:
+    od2 = od**2
+    if isPrime(od2 -(od-1)):
+        primes += [od2 -(od-1)]
+    if isPrime(od2 -2*(od-1)):
+        primes += [od2 -2*(od-1)]
+    if isPrime(od2 -3*(od-1)):
+        primes += [od2 -3*(od-1)]
+    diag += 4
+    if len(primes)/diag < 0.1:
+        print("side length ", od,
+              "\nprimes ", len(primes),
+              "\ntotatal diagonal ", diag)
+        break
+    od += 2
+
+
+
+
+#print(primes)
+print(time()-itime)
