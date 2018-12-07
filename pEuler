@@ -1,0 +1,53 @@
+from time import time, sleep
+from itertools import combinations
+itime = time()
+
+
+def isPrime(n):
+    if n in (2,3):
+        return True
+    if not n%2:
+        return False
+    i = 3
+    sqrtn = n**0.5
+    while n%i:
+        i += 2
+        if i > sqrtn:
+            return True
+    return False
+#for i in range(100):
+    #if isPrime(i):
+        #print(i)
+
+'''Here is the data strct
+pair{key:[val[v]]}'''
+i = 5
+pair = {}
+pair["3"] = []
+ans = []
+while len(ans) < 5:
+    if isPrime(i):
+        s = str(i)
+        #print("keys ", list(pair.keys()))
+        for key in pair.keys():
+            #print(key, key+s, s+key)
+            if isPrime(int(key+s)) and isPrime(int(s+key)):
+                #print("pair", pair)
+                for val in pair[key]:
+                    flag = True
+                    for v in val:
+                        if not(isPrime(int(v+s)) and isPrime(int(s+v))):
+                                flag = False
+                                break
+                    if flag:
+                        val += [s]
+                    if len(val) > 3 and val not in ans:
+                        print(key,val,sum(map(int, val))+int(key))
+                        print(time()-itime)
+                        ans += [val]
+                pair[key] += [[s]]
+        pair[s] = []
+    i += 2
+                
+print(time()-itime)
+
