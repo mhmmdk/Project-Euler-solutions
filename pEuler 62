@@ -1,0 +1,22 @@
+from time import time, sleep
+from itertools import combinations
+itime = time()
+
+cubes = {}
+trace = {}
+i = 10
+while True:
+    c = "".join(sorted(str(i**3)))
+    #print(c)
+    if c in cubes:
+        cubes[c] += 1
+        trace[c] += [i]
+    else:
+        cubes[c] = 1
+        trace[c] = [i]
+    if 5 in cubes.values():
+        print("cube of ",trace[c], " are ", c, "\nAnswer ", trace[c][0]**3)
+        break
+    i += 1
+
+print(time()-itime)
