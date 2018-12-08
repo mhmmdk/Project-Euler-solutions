@@ -1,0 +1,22 @@
+from time import time, sleep
+from math import sqrt
+itime = time()
+
+n = 23
+sqrtn = sqrt(n)
+#print(sqrtn)
+per = [int(sqrtn)]
+#print(sqrtn, per)
+dec = sqrtn - int(sqrtn)
+#print(dec)
+flag = []
+while len(per) < 100: #dec not in flag:
+    p = 1/(dec)
+    per += [int(p)]
+    flag += [dec]
+    print(dec, p, per[-1:])
+    dec = p - int(p)
+
+print(per)      
+print(time()-itime)
+
