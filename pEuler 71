@@ -1,0 +1,77 @@
+from time import time, sleep
+from fractions import Fraction
+itime = time()
+
+k = 1000000
+li = []
+ldiv = 0
+ma = 0
+
+for d in range(k,999900,-1):
+    for n in range(420000, 3*d//7+1):
+        if n > 1 and not d%n:
+            ldiv = n
+            break
+        #li += [Fraction(n,d)]
+        if ma < Fraction(n,d) and Fraction(n,d) != Fraction(3,7):
+            ma = Fraction(n,d)
+    if ldiv:
+        for nn in range(ldiv, 3*d//7+1 -ldiv, ldiv):
+            for newn in range(1,ldiv):
+                #li += [Fraction(nn+newn,d)]
+                if ma < Fraction(nn+newn,d) and Fraction(nn+newn,d) != Fraction(3,7):
+                    ma = Fraction(nn+newn,d)
+        m = 3*d//7+1 -ldiv +(3*d//7+1)%ldiv
+        for nnn in range(m+1, 3*d//7+1):
+            #li += [Fraction(nnn,d)]
+            if ma < Fraction(nnn,d) and Fraction(nnn,d) != Fraction(3,7):
+                ma = Fraction(nnn,d)
+'''        
+for d in range(3,k+1):
+    for n in range(1, 3*d//7+1):
+        if ma < Fraction(n,d) and Fraction(n,d) != Fraction(3,7):
+            ma = Fraction(n,d)
+      
+'''
+#ls = sorted(set(li))
+print(ma)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+k = 800
+li = []
+
+for d in range(2,k+1):
+    li += [Fraction(1,d)]
+    
+for n in range(1,k):
+    for d in range(n,k-n+1,n):
+        for dd in range(1,n):
+            li += [Fraction(n,d+dd)]     
+    m = (k//n)*n
+    for r in range(1,k%n+1):
+        li += [Fraction(n,m+r)]
+
+
+li += [Fraction(1,2)]
+ls = sorted(set(li))
+print(len(ls))
+'''
+    
+print(time()-itime)
+
