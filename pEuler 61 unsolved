@@ -1,50 +1,59 @@
 from time import time, sleep
-from itertools import combinations
-itime = time()
+st = time()
 
 tri, sq, penta, hexa, hepta, octa = [],[],[],[],[],[]
-for i in range(2,50000):
+for i in range(2,200):
     t = i*(i + 1)//2
     if t > 999 and t < 10000:
-        tri += [t]
+        tri += [[t//100],[t%100]]
     s = i**2
     if s > 999 and s < 10000:
-        sq += [s]
+        sq += [[s//100],[s%100]]
     p = i*(3*i-1)//2
     if p > 999 and p < 10000:
-        penta += [p]
+        penta += [[p//100],[p%100]]
     h = i*(2*i-1)
     if h > 999 and h < 10000:
-        hexa += [h]
+        hexa += [[h//100],[h%100]]
     h = i*(5*i-3)//2
     if h > 999 and h < 10000:
-        hepta += [h]
+        hepta += [[h//100],[h%100]]
     o = i*(3*i-2)
     if o > 999 and o < 10000:
-        octa += [o]
-if 2882 in sq:
-    print(tri[:5],octa[-5:])
+        octa += [[o//100],[o%100]]
+poly = [tri, sq, penta, hexa, hepta, octa ]
+p =   sq + penta + hexa + hepta+octa
+print(len(p))
+for l in range(6):
+    print(len(poly[l]))
 
-for last in range(10,100):
-    for lval in poly:
-        trace
-    if last in ltri:
-        trace += [ftri,ltri]
-    if last in lsq:
-        trace += [fsq,lsq]
-    if last in lpenta:
-        trace += [fpenta,lpenta]
-    if last in lhexa:
-        trace += [fhexa,lhexa]
-    if last in lhepta:
-        trace += [fhepta,lhepta]
-    if last in locta:
-        trace += [focta,locta]
 
+ind = 0
+ans = []
+octa = tri
+for o in octa:
+    print("o",o)
+    ind = octa.index(o)
+    for _ in range(60):
+        for i in p:
+            if o == i:
+                if (ind + p.index(o))%2:
+                    ans += [o]
+                    if p[p.index(o)-p.index(o)%2] != o :
+                        o = p[p.index(o)-p.index(o)%2]
+                        ind = p.index(o)-p.index(o)%2
+                    else:
+                        o = p[p.index(o)-p.index(o)%2+1]
+                        ind = p.index(o)-p.index(o)%2 + 1
+                    ans += [o]
+                #print(octa[ind - ind%2], octa[ind - ind%2+1])
+                #print(p[p.index(o)-p.index(o)%2], p[p.index(o)-p.index(o)%2+1])
+    print(ans)
+    ans = []
+    
                          
-                 
-#print(i)
 
-
-               
-print(time()-itime)
+print('________THE___________%s__________END________'%(time() - st))
+#import os
+#os.system("pause")
+#sleep(5000)
