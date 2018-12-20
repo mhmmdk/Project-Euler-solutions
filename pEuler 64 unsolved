@@ -1,22 +1,36 @@
 from time import time, sleep
+from fractions import Fraction
 from math import sqrt
+from decimal import *
+getcontext().prec=300
 itime = time()
 
-n = 23
-sqrtn = sqrt(n)
-#print(sqrtn)
-per = [int(sqrtn)]
-#print(sqrtn, per)
-dec = sqrtn - int(sqrtn)
-#print(dec)
-flag = []
-while len(per) < 100: #dec not in flag:
-    p = 1/(dec)
-    per += [int(p)]
-    flag += [dec]
-    print(dec, p, per[-1:])
-    dec = p - int(p)
 
-print(per)      
+ans = 0
+for n in range(10001):
+    sqrtn = Decimal(n).sqrt()
+    per = [int(sqrtn)]
+    if sqrtn == per[0]:
+        continue
+    dec = Fraction(sqrtn - int(sqrtn))
+    flag = []
+    while len(per) < 3000: #dec not in flag:
+        if dec == 0:
+            print(n, " err: zero div")
+            break
+        p = 1/(dec)
+        if str(float(p))[:50] in flag:
+            #print(n, ", period = ", len(per)-1)
+            if not len(per)%2:
+                ans += 1
+            break
+        per += [int(p)]
+        flag += [str(float(p))[:50]]
+        #print(dec, p, per)
+        dec = p - per[-1:][0]
+
+print(ans)
+print(per)
+
+     
 print(time()-itime)
-
