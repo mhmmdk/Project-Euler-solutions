@@ -1,0 +1,26 @@
+from time import time, sleep
+from fractions import Fraction
+itime = time()
+
+ans = Fraction(0)
+for e in range(66, 0, -2):
+    #print(e, ans)
+    ans = 1/(ans+1)
+    #print(ans)
+    ans = 1/(ans+e)
+    #print(ans)
+    ans += 1
+    ans = 1/ans
+    #print(ans)
+
+ans += 2
+#print(ans)
+tot = 0
+for i in str(ans.numerator):   
+    tot += int(i)
+print(tot)
+
+
+
+
+print(time()-itime)
