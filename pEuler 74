@@ -1,0 +1,30 @@
+from time import time, sleep
+from math import factorial
+itime = time()
+
+def sumFact(n):
+    ans = 0
+    while n:
+        ans += factorial(n%10)
+        #print(ans)
+        n = n//10
+    return ans
+#print(sumFact(363601))
+ans = 0
+for i in range(500001, 1000001):
+    r = sumFact(i)
+    li = []
+    c = 0
+    while r not in li:
+        li += [r]
+        r = sumFact(r)
+        c += 1
+    if c+1 == 60:
+        ans += 1
+        #print(i, "\t", c)
+        
+print(ans)
+
+
+print(time()-itime)
+sleep(200)
