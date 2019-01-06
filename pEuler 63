@@ -1,0 +1,16 @@
+from time import time
+
+
+itime = time()
+count = 0
+
+for digitNumber in range(0, 1000):
+    for digit in range(10):
+        n = digit**digitNumber
+        if len(str(n)) == digitNumber:
+            count += 1
+            #print(n, digit, digitNumber)
+            #break
+                
+print(count)
+print(time() - itime)
