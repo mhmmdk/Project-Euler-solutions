@@ -1,0 +1,366 @@
+from time import time
+
+
+itime = time()
+
+def isRoyalFlush(cards):
+    if not isFlush(cards):
+        return False
+
+    hand = "".join(cards)
+    for value in "TJQKA":
+        if not value in hand:
+            return False
+    #print('Royal Flush')  
+    return True
+
+
+def isStraightFlush(cards):
+    if isFlush(cards) and isStraight(cards):
+        #print('striaght Flush')
+        return isFlush(cards) + isStraight(cards)
+
+    return False
+
+
+def isFourOfKind(cards):
+    hand = "".join(cards)
+    
+    for val in "23456789TJQKA":
+        if hand.count(val) == 4:
+            #print('Four of kind')
+            return val
+
+    return False
+
+
+def isFullHouse(cards):
+    if isTwoPair(cards) and isThreeOfKind(cards):
+        #print('full house')
+        return [isThreeOfKind(cards), isPair(cards)]
+
+    return False
+
+
+def isFlush(cards):
+    hand = "".join(cards)
+    theSuit = False
+    vals = []
+    
+    for suit in "SCHD":
+        if hand.count(suit) == 5:
+            theSuit = suit
+            break
+        
+    if theSuit:
+        for card in cards:
+            if card[1] == theSuit:
+                vals += [card[0]]
+        #print('flush')
+        return vals
+
+    return False
+
+
+def isStraight(cards):
+    vals = []
+    for card in cards:
+        if card[0] == "T":
+            vals += [10]
+        elif card[0] == "J":
+            vals += [11]
+        elif card[0] == "Q":
+            vals += [12]
+        elif card[0] == "K":
+            vals += [13]
+        elif card[0] == "A":
+            vals += [14]
+        else :
+            vals += [int(card[0])]
+
+    vals.sort(key=int)
+
+    for i in range(4):
+        if not vals[i+1] - vals[i] == 1:
+            return False
+    #print('straight') 
+    return vals
+
+
+def isThreeOfKind(cards):
+    hand = "".join(cards)
+    
+    for val in "23456789TJQKA":
+        if hand.count(val) == 3:
+            #print('Three of kind')
+            return val
+
+    return False
+
+
+def isTwoPair(cards):
+    hand = "".join(cards)
+    count = 0
+    vals = []
+    
+    for val in "23456789TJQKA":
+        if hand.count(val) > 1:
+            count += 1
+            vals += [val]
+
+    if count == 2:
+        #print('two pair')
+        return vals
+    return False
+
+
+def isPair(cards):
+    hand = "".join(cards)
+    
+    for val in "23456789TJQKA":
+        if hand.count(val) > 1:
+            #print('pair')
+            return val
+
+    return False
+
+
+def highCard(cards, cards1):
+    vals = []
+    vals1 = []
+
+    for card in cards:
+        if card[0] == "T":
+            vals += [10]
+        elif card[0] == "J":
+            vals += [11]
+        elif card[0] == "Q":
+            vals += [12]
+        elif card[0] == "K":
+            vals += [13]
+        elif card[0] == "A":
+            vals += [14]
+        else :
+            vals += [int(card[0])]
+
+    for card in cards1:
+        if card[0] == "T":
+            vals1 += [10]
+        elif card[0] == "J":
+            vals1 += [11]
+        elif card[0] == "Q":
+            vals1 += [12]
+        elif card[0] == "K":
+            vals1 += [13]
+        elif card[0] == "A":
+            vals1 += [14]
+        else :
+            vals1 += [int(card[0])]
+
+    vals.sort()
+    vals1.sort()
+
+    for i in range(len(cards)-1, -1, -1):
+        if vals[i] > vals1[i]:
+            return cards
+        elif vals[i] < vals1[i]:
+            return cards1
+
+    return False
+
+
+#The Utility!
+def intValue(i):
+    card = [i]
+    vals = []
+    if card[0] == "T":
+        vals += [10]
+    elif card[0] == "J":
+        vals += [11]
+    elif card[0] == "Q":
+        vals += [12]
+    elif card[0] == "K":
+        vals += [13]
+    elif card[0] == "A":
+        vals += [14]
+    else :
+        vals += [int(card[0])]
+    return int(vals[0])
+
+################################################################################
+def main(cards, cards1):
+    switch = [cards, cards1]
+
+    for i in range(2): 
+        if isRoyalFlush(switch[i]) and not isRoyalFlush(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isStraightFlush(switch[i]) and not isStraightFlush(switch[(i+1)%2]):
+            print(switch, i)
+            return i
+        
+    for i in range(2): 
+        if isFourOfKind(switch[i]) and not isFourOfKind(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isFullHouse(switch[i]) and not isFullHouse(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isFlush(switch[i]) and not isFlush(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isStraight(switch[i]) and not isStraight(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isThreeOfKind(switch[i]) and not isThreeOfKind(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isTwoPair(switch[i]) and not isTwoPair(switch[(i+1)%2]):
+            return i
+
+    for i in range(2): 
+        if isPair(switch[i]) and not isPair(switch[(i+1)%2]):
+            return i
+
+    # They got to have equal rank, right?
+    # And No two = Royal. That is fucking rule.
+    for nothingJust4Break in range(1):
+        if isStraightFlush(switch[0]):
+            higher = highCard(isFlush(switch[0]), isFlush(switch[1]))
+            if higher:
+                if isFlush(switch[0]) == higher: 
+                    return 0
+                return 1
+            else:
+                break
+
+        
+        if isFourOfKind(switch[0]):
+            if intValue(isFourOfKind(switch[0])) > intValue(isFourOfKind(switch[1])):
+                return 0
+            elif intValue(isFourOfKind(switch[0])) < intValue(isFourOfKind(switch[1])):
+                return 1
+            break
+
+
+        if isFullHouse(switch[0]):
+            vals = isFullHouse(switch[0])
+            vals1 = isFullHouse(switch[1])
+            
+            for i in range(2):
+                if intValue(vals[i]) > intValue(vals1[i]):
+                    return 0
+                elif intValue(vals[i]) < intValue(vals1[i]):
+                    return 1
+
+            break
+
+
+        if isFlush(switch[0]):
+            higher = highCard(isFlush(switch[0]), isFlush(switch[1]))
+            if higher:
+                if isFlush(switch[0]) == higher: 
+                    return 0
+                return 1
+            else:
+                break
+
+
+        if isStraight(switch[0]):
+            if intValue(isStraight(switch[0])[0]) > intValue(isStraight(switch[0])[1]):
+                return 0
+            elif intValue(isStraight(switch[0])[0]) < intValue(isStraight(switch[0])[1]):
+                return 1
+            break
+
+
+        if isThreeOfKind(switch[0]):
+            if intValue(isThreeOfKind(switch[0])) > intValue(isThreeOfKind(switch[1])):
+                return 0
+            if intValue(isThreeOfKind(switch[0])) < intValue(isThreeOfKind(switch[1])):
+                return 1
+            break
+
+
+        if isTwoPair(switch[0]):
+            val = isTwoPair(switch[0])
+            vals = []
+            val1 = isTwoPair(switch[1])
+            vals1 = []
+
+            for v in val:
+                vals += [intValue(v)]
+            for v in val1:
+                vals1 += [intValue(v)]
+
+            vals.sort()
+            vals1.sort()
+            
+            for i in range(2):
+                if vals[i] > vals1[i]:
+                    return 0
+                elif vals[i] < vals1[i]:
+                    return 1
+
+            break
+
+
+        if isPair(switch[0]):
+            if intValue(isPair(switch[0])) > intValue(isPair(switch[1])):
+                return 0
+            elif intValue(isPair(switch[0])) < intValue(isPair(switch[1])):
+                return 1
+            break
+
+        
+    #print('The break')
+    higher = highCard(switch[0], switch[1])
+    if higher == switch[0]:
+        return 0
+    return 1
+################################################################################
+
+file = open(r"C:\Users\insa\Desktop\poker.txt.txt")
+count = 0
+
+for line in file:
+    line = line.strip().split()
+    cards = line[:5]
+    cards1 = line[-5:]
+
+    if main(cards, cards1) == 0:
+        count += 1
+    #print(main(cards, cards1), '#################')
+    #break
+
+print(count)
+
+
+
+################################################################################
+
+#Just check on the go
+'''
+cards = ['2H', '2D', '4C', '4D', '4S']
+cards1 = ['3C', '3D', '3S', '9S', '9D']
+
+print('main', main(cards, cards1))
+print('high card', highCard(cards, cards1))
+print('a pair', isPair(cards))
+print('two pair', isTwoPair(cards))
+print('three of kind', isThreeOfKind(cards))
+print('straight', isStraight(cards))
+print('Flush', isFlush(cards))
+print('full House', isFullHouse(cards))
+print('four Of kind', isFourOfKind(cards))
+print('straight flush', isStraightFlush(cards))
+print('royal flush', isRoyalFlush(cards))
+'''
+
+print(time() - itime)
