@@ -1,0 +1,70 @@
+from time import time, sleep
+from fractions import Fraction
+from math import sqrt
+from decimal import *
+getcontext().prec=1000
+itime = time()
+
+
+def byConv(n):
+    ans = 0
+    sqrtn = Decimal(n).sqrt()
+    per = []
+    initial = int(sqrtn)
+    
+    if not sqrtn == initial:
+        dec = Fraction(sqrtn - int(sqrtn))
+        flag = []
+        
+        while len(per) < 30000: #dec not in flag:
+            try :
+                p = 1/(dec)
+            except :
+                print(d, "err div by 0")
+                break
+            if str(float(p))[:100] in flag:
+                #print(n, per)
+
+                '''The convergence'''
+                length = len(per)
+                
+                for zz in range(100):
+                    conv = Fraction(0)
+                    for i in range(zz, -1, -1):
+                        conv += Fraction( per[i%length] )
+                        conv = Fraction(1)/conv
+                        #print(zz, "conv: ", conv, per[i%length])
+
+                    conv += Fraction(initial)
+                    #print("conv: ", conv)
+                    x = conv.numerator
+                    y = conv.denominator
+
+                    if x**2-n*y**2 == 1:
+                        return x
+                    
+
+                    
+            
+            per += [int(p)]
+            flag += [str(float(p))[:100]]
+            dec = p - per[-1:][0]
+
+        #print(ans)
+        print("There is Errer @", d)
+
+        
+
+ma = 0
+trace = 0
+for d in range(2, 1001):
+    x = byConv(d)
+    
+    if x and ma < x:
+        ma = x
+        trace = d
+
+
+
+print(ma, trace)     
+print(time()-itime)
