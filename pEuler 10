@@ -1,0 +1,36 @@
+from time import time
+
+initial = time()
+
+n = 29
+counter = 0
+primes = [7,11,13,17,19,23,29]
+total = 2 + 3 + 5 + 7 + 11 + 13 + 17 + 19 + 23 + 29
+
+
+# no multiples of 2, 3, 5
+while n < 2000000:
+    for i in [2,6,4,2,4,2,4,6]:
+        n += i
+        isPrime = True
+        sqrt_n = n**0.5
+
+        for p in primes:
+
+            # This is game changer
+            if p > sqrt_n:
+                break
+
+            if not n%p:
+                isPrime = False
+                break
+
+        if isPrime:
+            primes += [n]
+            total += n
+
+
+print(total, n)
+
+
+print(time()-initial)
