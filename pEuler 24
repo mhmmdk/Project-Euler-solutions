@@ -1,0 +1,21 @@
+def fact(n):
+    if n > 1:
+        return n*fact(n-1)
+    else:
+        return 1
+
+
+ma = 1000000
+l = [0,0,0,0,0,0,0,0,0,0]
+while ma > 1:
+    n = 1
+    while fact(n) < ma:
+        n += 1
+    ma -= fact(n-1)
+    l[n-1] += 1
+
+ob = [0,1,2,3,4,5,6,7,8,9]
+ans = ''
+for i in range(9,-1,-1):
+    ans += str(ob.pop(l[i]))
+print(ans)
