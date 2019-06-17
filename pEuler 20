@@ -3,8 +3,6 @@ def fact(n):
         return n*fact(n-1)
     else:
         return 1
-f = fact(100)
-print(f)
-li = [int(i) for i in str(f)]
-print(sum(li))
+        
+print(sum([int(i) for i in str(fact(100))]))
 
