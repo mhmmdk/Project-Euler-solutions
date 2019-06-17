@@ -1,6 +1,3 @@
-
-n = 2200000000000
-
 def sum_divisors(n, divisor):
     sqrtN = n**0.5    
     i = divisor
@@ -9,11 +6,9 @@ def sum_divisors(n, divisor):
         if not n%i:
             divisor = i
             if i == n//i or i == 1:
-                #print(i, n//i)
                 t+= i
                 break
             t += sum([i,n//i])
-            #print(i, n//i)
             break 
         i += 1
     if i < sqrtN:
@@ -21,7 +16,7 @@ def sum_divisors(n, divisor):
         t += sum_divisors(n, divisor)
     return t
 
-n = 10000
+n = 100000
 li = list(range(2,n))
 for i in range(2,n):
     di = sum_divisors(i,1)
@@ -29,29 +24,13 @@ for i in range(2,n):
         try:
             li.remove(i)
         except:
-            ''
+            pass
         continue
     ddi = sum_divisors(di,1)
-    if di < 4:
+    if ddi!=i:
         try:
             li.remove(i)
-            #print(i, di)
         except:
-            ""
-    elif ddi!=i:
-        try:
-            li.remove(i)
-            #print("removed", i, di, ddi)
-        except:
-            ''
-    else:
-        '''print("amic", i,di,ddi)'''
-        
-t = sum_divisors(1,1)
-print(li)
+            pass
+
 print(sum(li))
-
-
-print('___________________%s__________________'%(time() - st))
-
-su = sum_divisors(n, 1)
